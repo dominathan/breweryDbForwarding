@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
-
-app.use(express.static(__dirname + "/public"))
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
@@ -18,15 +16,9 @@ app.use(function(req, res, next) {
 });
 
 app.get('/any-request/:url', function(req,res,next) {
-  console.log('REQ BODY', req.body);
-  console.log("REQ PARAMS", req.params);
   var url = req.params.url
   request.get({url: url}, function(err, response) {
-    if(err) {
-      console.log("OH FUCK", err);
-      next(err);
-    }
-    console.log('YAAAYY', response);
+    if(err) next(err);
     res.send(response.body);
   });
 });
