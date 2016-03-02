@@ -17,33 +17,10 @@ app.use(function(req, res, next) {
   next();
 });
 
-// app.get('/', function(req,response) {
-//   response.sendFile('public');
-// });
-
-app.post('/any-request/', function(req,res,next) {
-  console.log('test', req.body);
-  var url = req.body
-  // var options = {
-  //   url: req.body.url
-  // }
-  request.get({url: url}, function(err, response) {
-    if(err) {
-      console.log("OH FUCK", err);
-      next(err);
-    }
-    console.log('YAAAYY', response);
-    res.send(response.body);
-  })
-})
-
 app.get('/any-request/:url', function(req,res,next) {
   console.log('REQ BODY', req.body);
   console.log("REQ PARAMS", req.params);
   var url = req.params.url
-  // var options = {
-  //   url: req.body.url
-  // }
   request.get({url: url}, function(err, response) {
     if(err) {
       console.log("OH FUCK", err);
@@ -51,18 +28,8 @@ app.get('/any-request/:url', function(req,res,next) {
     }
     console.log('YAAAYY', response);
     res.send(response.body);
-  })
-})
-
-// app.get('/weather/:lat/:long', function(req,res,next){
-//   console.log("PARAMS", req.params);
-//   var url = "https://api.forecast.io/forecast/854526c92cddcc6edaca6e044dc11acf/" + req.params.lat + ',' + req.params.long;
-//   request.get({url: url}, function(err, response) {
-//     console.log("ERR: ", err);
-//     console.log("RESPONSE: ", response.body);
-//     res.send(JSON.parse(response.body));
-//   });
-// });
+  });
+});
 
 app.listen(port, function() {
   console.log(" LISTENING ON PORT " + port);
