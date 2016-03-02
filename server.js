@@ -15,8 +15,8 @@ app.use(bodyParser.json());
 //   response.sendFile('public');
 // });
 
-app.get('/any-request/', function(req,res,next) {
-  console.log('test', req.body.url)
+app.post('/any-request/', function(req,res,next) {
+  console.log('test', req.body);
   var url = req.body.url
   request.get({url: url}, function(err, response) {
     if(err) {
@@ -24,7 +24,7 @@ app.get('/any-request/', function(req,res,next) {
       next(err);
     }
     console.log('YAAAYY', response);
-    res.send(JSON.parse(response.body));
+    res.send(response.body);
   })
 })
 
