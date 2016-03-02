@@ -39,7 +39,7 @@ app.post('/any-request/', function(req,res,next) {
 
 app.get('/any-request/:url', function(req,res,next) {
   console.log('REQ BODY', req.body);
-  console.log("REQ PARAMS")
+  console.log("REQ PARAMS", req.params);
   var url = req.body
   // var options = {
   //   url: req.body.url
