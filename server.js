@@ -15,14 +15,15 @@ app.use(bodyParser.json());
 //   response.sendFile('public');
 // });
 
-app.get('/any-request/:url/', function(req,res,next) {
-  console.log('test', req.params)
-  var url = req.params.url
+app.get('/any-request/', function(req,res,next) {
+  console.log('test', req.body.url)
+  var url = req.body.url
   request.get({url: url}, function(err, response) {
     if(err) {
       console.log("OH FUCK", err);
       next(err);
     }
+    console.log('YAAAYY', response);
     res.send(JSON.parse(response.body));
   })
 })
