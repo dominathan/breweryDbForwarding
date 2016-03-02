@@ -37,6 +37,23 @@ app.post('/any-request/', function(req,res,next) {
   })
 })
 
+app.get('/any-request/:url', function(req,res,next) {
+  console.log('REQ BODY', req.body);
+  console.log("REQ PARAMS")
+  var url = req.body
+  // var options = {
+  //   url: req.body.url
+  // }
+  request.get({url: url}, function(err, response) {
+    if(err) {
+      console.log("OH FUCK", err);
+      next(err);
+    }
+    console.log('YAAAYY', response);
+    res.send(response.body);
+  })
+})
+
 // app.get('/weather/:lat/:long', function(req,res,next){
 //   console.log("PARAMS", req.params);
 //   var url = "https://api.forecast.io/forecast/854526c92cddcc6edaca6e044dc11acf/" + req.params.lat + ',' + req.params.long;
